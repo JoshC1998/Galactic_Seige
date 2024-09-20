@@ -7,12 +7,13 @@ from lib.high_score_manager import Highscore
 
 pygame.init()
 screen = pygame.display.set_mode((1000, 800))
+
 # part of tank can't leave screen
 screen_rect = screen.get_rect()  
 pygame.display.set_caption('Tankzzzz')
 clock = pygame.time.Clock()
 
-## Font ##
+# Font 
 title_font = pygame.font.Font("font/tank.ttf", 40)
 title_surface = title_font.render("Galactic Seige", False, "Purple")
 title_rect = title_surface.get_rect(center=(500, 400))
@@ -20,7 +21,7 @@ title_rect = title_surface.get_rect(center=(500, 400))
 high_score_surface = title_font.render("High Scores", False, "Purple")
 high_score_rect = high_score_surface.get_rect(center=(500, 50))
 
-## Enter name stuff
+# Enter name stuff
 manager = pygame_textinput.TextInputManager(validator=lambda input: len(input) <= 5)
 textinput_custom = pygame_textinput.TextInputVisualizer(manager=manager, font_object=title_font, font_color="White")
 
@@ -51,19 +52,18 @@ explosion_frames = [
     pygame.image.load('Graphics/explosions Vector/Explosion8-removebg-preview.png').convert_alpha()  # Add more frames if you have them
 ]
 
-#### Score Board ####
+# Score Board 
 def display_high_score(score_font, user, score, disp):
     score_surface = score_font.render(f"{user}.......{score}", False, "White")
     score_rect = score_surface.get_rect(center=(500, disp))
     screen.blit(score_surface, score_rect)
 
-#### Live Score ####
+# Live Score 
 def display_score(score_font, score):
     score_surface = score_font.render(f"Score: {score}", False, "White")
     score_rect = score_surface.get_rect(center=(500, 25))
     screen.blit(score_surface, score_rect)
 
-#### States/screens ####
 # Start page
 high_scores = False
 game_active = False
@@ -218,7 +218,7 @@ tank_group = pygame.sprite.GroupSingle(tank)
 explosion_group = pygame.sprite.Group()
 
 def reset_aliens():
-    alien_group.empty()  # Remove all existing aliens
+    alien_group.empty() 
     spawn_aliens() 
     
 # Main game loop
@@ -251,7 +251,7 @@ while True:
                         textinput_custom.value = ""
                         # Reset tank health and aliens
                         tank.health_bar.current_health = 100
-                        reset_aliens()  # Reset aliens
+                        reset_aliens()  
 
                 if event.key == pygame.K_TAB:
                     game_active = False
@@ -259,18 +259,13 @@ while True:
                     high_scores = False
                     tank.health_bar.current_health = 100
                     score = 0
-                    reset_aliens()  # Reset aliens
-
-    # Game logic...
+                    reset_aliens()  
 
     # Check for game over condition
     if tank.health_bar.current_health <= 0:
         game_active = False
         game_over = True
-        reset_aliens()  # Reset aliens when game over
-
-    # Rendering logic...
-
+        reset_aliens()  
 
     if game_active:
         tank.update()

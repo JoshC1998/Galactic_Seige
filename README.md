@@ -1,7 +1,7 @@
 Galactic Seige :
 
 A simple game, created using Pygame. Survive as long as possible by destroying the incoming alien ships before they past your tank to earn points.
-Challenge your reflexes and strategic thinking to achieve a high score and become the ultimate defender against the galactic forces.
+Challenge your reflexes and strategic prowess to achieve a high score and become the ultimate defender against the galactic forces.
 
 Description :
 
