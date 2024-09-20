@@ -21,7 +21,7 @@ git clone git@github.com:JoshC1998/Galactic_Seige.git
 
 Navigate to the project directory:
 
-cd Harry_vs_Dementor
+cd Galatic_Seige 
 
 Install the required dependencies using pipenv:
 
