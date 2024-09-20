@@ -5,7 +5,7 @@ Challenge your reflexes and strategic prowess to achieve a high score and become
 
 Description :
 
-"Galactic Seige" is a game developed using the Python programming language and the Pygame library. In this game, players take on the role of a tank, to shot lasers at the alien ships
+"Galactic Seige" is a game developed using the Python programming language and the Pygame library. In this game, players take on the role of a tank, to shoot lasers at the alien ships
 
 Technical Requirements :
 
@@ -13,7 +13,10 @@ To run the game locally, you need the following: Python 3.7 or later
 
 Gameplay Features:
 
-Control the tank's movement using arrow keys. Shoot lasers at the alien ships using the space key to eliminate them. Destroying alien ships earns you points, while getting hit by them or not desotrying the alien ships before they past your tanl reduces your health. The game features dynamic visuals, including character animations and spell effects, thanks to the Pygame library.
+Control the tank's movement using arrow keys
+Shoot lasers at the alien ships using the space key to eliminate them
+Destroying alien ships earns you points, while getting hit by them or not desotrying the alien ships before they past your tanl reduces your health
+The game features dynamic visuals, including character animations and explosion effects, thanks to the Pygame library.
 
 Installation:
 
