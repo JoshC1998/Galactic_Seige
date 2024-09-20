@@ -54,6 +54,5 @@ Dependencies:
 The game relies on the following libraries:
 
 Pygame: A web application framework for building interactive web applications with Python.
-Contributions
 
 Contributions to the game are welcome! If you'd like to add features, fix bugs, or enhance the gameplay, feel free to fork this repository and create a pull request.
