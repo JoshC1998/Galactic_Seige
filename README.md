@@ -25,7 +25,7 @@ git clone git@github.com:JoshC1998/Galactic_Seige.git
 
 Navigate to the project directory: 
 
-cd Galatic_Seige 
+cd Galactic_Seige 
 
 Install the required dependencies using pipenv:
 
@@ -43,9 +43,9 @@ How to Play :
 
 Run the game by executing the main script
 
-Arrow Left: Move the tank left
+Arrow Left : Move the tank left
 
-Arrow Right: Move the tank right
+Arrow Right : Move the tank right
 
 Space : Shoot lasers
 
