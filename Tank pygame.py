@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((1000, 800))
 
 # part of tank can't leave screen
 screen_rect = screen.get_rect()  
-pygame.display.set_caption('Tankzzzz')
+pygame.display.set_caption('Galactic Seige')
 clock = pygame.time.Clock()
 
 # Font 
