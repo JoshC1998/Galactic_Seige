@@ -15,7 +15,7 @@ Gameplay Features:
 
 Control the tank's movement using arrow keys.
 Shoot lasers at the alien ships using the space key to eliminate them.
-Destroying alien ships earns you points, while getting hit by them or not desotrying the alien ships before they past your tanl reduces your health.
+Destroying alien ships earns you points, while getting hit by them or not desotrying the alien ships before they past your tank reduces your health.
 The game features dynamic visuals, including character animations and explosion effects, thanks to the Pygame library.
 
 Installation:
