@@ -36,6 +36,10 @@ sky_surface = pygame.image.load('Graphics/sky.png').convert()
 sky_surface = pygame.transform.scale(sky_surface, (1000, 600))
 ground_surface = pygame.transform.scale(ground_surface, (1000, 250))
 
+# Load power-up images
+health_powerup_image = pygame.image.load('Graphics/health_powerup.png').convert_alpha()
+explosion_powerup_image = pygame.image.load('Graphics/explosion_powerup.png').convert_alpha()
+
 alien_images = [
     'Graphics/KlaedDreadnougtBase.png',
     'Graphics/KlaedBattlecruiserBase.png',
@@ -95,7 +99,7 @@ class Aliens(pygame.sprite.Sprite):
         original_alien_img = pygame.image.load(image_path).convert_alpha()
         self.image = pygame.transform.rotate(original_alien_img, angle)
         self.rect = self.image.get_rect(topleft=(x, y))
-        self.velocity = random.randint(2, 3)
+        self.velocity = random.randint(2, 5)
 
     def update(self):
         self.rect.y += self.velocity
@@ -192,6 +196,23 @@ class Tank(pygame.sprite.Sprite):
     def decrease_health(self, amount):
         self.health_bar.decrease_health(amount)
 
+class HealthPowerup(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.transform.scale(health_powerup_image, (40, 40))  # Adjust size as needed
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.velocity = random.randint(1, 3)  # Move downward
+
+    def update(self):
+        self.rect.y += self.velocity
+        if self.rect.top >= screen.get_height():
+            self.kill()
+
+    def apply_effect(self, tank):
+        if tank.health_bar.current_health < tank.health_bar.max_health:
+            tank.health_bar.current_health = min(tank.health_bar.max_health, tank.health_bar.current_health + 20)
+        self.kill()
+
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
@@ -211,7 +232,39 @@ class Explosion(pygame.sprite.Sprite):
             else:
                 self.image = self.frames[self.current_frame]
                 self.last_update = now
+class ExplosionPowerup(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        self.image = pygame.transform.scale(explosion_powerup_image, (40, 40))  # Adjust size as needed
+        self.rect = self.image.get_rect(topleft=(x, y))
+        self.velocity = random.randint(1, 3)
 
+    def update(self):
+        self.rect.y += self.velocity
+        if self.rect.top >= screen.get_height():
+            self.kill()
+
+    def apply_effect(self, aliens, explosion_group):
+        for alien in aliens:
+            explosion = Explosion(alien.rect.centerx, alien.rect.centery)
+            explosion_group.add(explosion)
+            alien.kill()
+        self.kill()
+
+powerup_group = pygame.sprite.Group()
+
+def spawn_powerups():
+    if random.random() < 0.01:  # Small chance to spawn a health power-up
+        x = random.randint(0, screen.get_width() - 40)
+        y = random.randint(-100, -40)
+        health_powerup = HealthPowerup(x, y)
+        powerup_group.add(health_powerup)
+
+    if random.random() < 0.01:  # Small chance to spawn an explosion power-up
+        x = random.randint(0, screen.get_width() - 40)
+        y = random.randint(-100, -40)
+        explosion_powerup = ExplosionPowerup(x, y)
+        powerup_group.add(explosion_powerup)
 # Initialize tank
 tank = Tank(100, 600)
 tank_group = pygame.sprite.GroupSingle(tank)
@@ -273,6 +326,20 @@ while True:
         screen.blit(ground_surface, (0, 550))
         display_score(title_font, score)
 
+        # Spawn power-ups randomly
+        spawn_powerups()
+
+        # Update and draw power-ups
+        powerup_group.update()
+        powerup_group.draw(screen)
+
+        # Check for collisions between the tank and power-ups
+        for powerup in powerup_group:
+            if pygame.sprite.spritecollide(tank, powerup_group, False):
+                if isinstance(powerup, HealthPowerup):
+                    powerup.apply_effect(tank)
+                elif isinstance(powerup, ExplosionPowerup):
+                    powerup.apply_effect(alien_group, explosion_group)
         # Update and draw aliens
         alien_group.update()
         alien_group.draw(screen)
