@@ -15,11 +15,10 @@ clock = pygame.time.Clock()
 
 ## Font 
 title_font = pygame.font.Font("font/tank.ttf", 40)
-title_font.set_bold(True)  # Make the font bold
-title_surface = title_font.render("Galactic Seige", False, "White")  # Changed to white
+title_surface = title_font.render("Galactic Seige", False, "White")  
 title_rect = title_surface.get_rect(center=(500, 400))
 
-high_score_surface = title_font.render("High Scores", False, "White")  # Changed to white
+high_score_surface = title_font.render("High Scores", False, "White")  
 high_score_rect = high_score_surface.get_rect(center=(500, 50))
 
 ## Enter name stuff
@@ -61,13 +60,13 @@ explosion_powerup_image = pygame.image.load('Graphics/explosion_powerup.png').co
 
 ## Score Board 
 def display_high_score(score_font, user, score, disp):
-    score_surface = score_font.render(f"{user}.......{score}", False, "White")  # Updated to white
+    score_surface = score_font.render(f"{user}.......{score}", False, "White")  
     score_rect = score_surface.get_rect(center=(500, disp))
     screen.blit(score_surface, score_rect)
 
 ## Live Score 
 def display_score(score_font, score):
-    score_surface = score_font.render(f"Score: {score}", False, "White")  # Updated to white
+    score_surface = score_font.render(f"Score: {score}", False, "White")  
     score_rect = score_surface.get_rect(center=(500, 25))
     screen.blit(score_surface, score_rect)
 
